@@ -13,11 +13,11 @@ const commands = [
         choices: [
           {
             name: "Farwater: Create Basics",
-            value: `IP for Farwater: Create Basics is \`${process.env.BASICS_IP}\``,
+            value: `${process.env.BASICS_IP}`,
           },
           {
             name: "Create: Arcane Engineering",
-            value: `IP for Create: Arcane Engineering is \`${process.env.CAE_IP}\``,
+            value: `${process.env.CAE_IP}`,
           }
         ],
         required: true,

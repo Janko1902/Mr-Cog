@@ -24,8 +24,30 @@ client.on("interactionCreate", (interaction) => {
 
   if (interaction.commandName === "ip") {
     const ip = interaction.options.get("server").value;
+    
+    if (interaction.options.get("server").value === process.env.BASICS_IP) {
+      const embed = new EmbedBuilder()
+        .setColor("Random")
+        .addFields(
+          {
+            name: "Farwater: Create Basics",
+            value: `IP: ${ip}`
+          }
+        );
+      
+      interaction.reply({ embeds: [embed] });
+    } else {
+      const embed = new EmbedBuilder()
+        .setColor("Random")
+        .addFields(
+          {
+            name: "Create: Arcane Engineering",
+            value: `IP: ${ip}`
+          }
+        );
 
-    interaction.reply({ content: `${ip}` });
+      interaction.reply({ embeds: [embed] });
+    }
   }
 
   if (interaction.commandName === "server") {
