@@ -35,11 +35,11 @@ client.on("interactionCreate", (interaction) => {
       .setColor("Random")
       .addFields(
         {
-          name: "Farwater: Create Basics <:fabric:1348353372012413000>",
+          name: "Farwater: Create Basics - <:fabric:1348353372012413000> Fabric",
           value: `IP: \`${process.env.BASICS_IP}\`\n <:curseforge:1348353413221453997> [Curseforge](<https://www.curseforge.com/minecraft/modpacks/farwater-create-basic>)`,
         },
         {
-          name: "Create: Arcane Engineering <:forge:1348353401226006760>",
+          name: "Create: Arcane Engineering - <:forge:1348353401226006760> Forge",
           value: `IP: \`${process.env.CAE_IP}\`\n <:curseforge:1348353413221453997> [Curseforge](<https://www.curseforge.com/minecraft/modpacks/create-arcane-engineering>)`,
         }
       );
