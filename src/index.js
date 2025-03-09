@@ -1,4 +1,4 @@
-require("src/register-commands.js");
+require("./register-commands.js");
 require("dotenv").config();
 const {
   Client,
