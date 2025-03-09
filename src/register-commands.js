@@ -25,7 +25,7 @@ const commands = [
     ],
   },
   {
-    name: "server",
+    name: "servers",
     description: "Shows server info.",
   },
 ];
