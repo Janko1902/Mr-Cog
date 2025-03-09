@@ -1,3 +1,4 @@
+require("src/register-commands.js");
 require("dotenv").config();
 const { REST, Routes, ApplicationCommandOptionType } = require("discord.js");
 
