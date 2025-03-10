@@ -59,11 +59,11 @@ client.on("interactionCreate", (interaction) => {
       .addFields(
         {
           name: "Farwater: Create Basics - <:fabric:1348353372012413000> Fabric",
-          value: `IP: \`${process.env.BASICS_IP}\`\n <:curseforge:1348353413221453997> [Curseforge](<https://www.curseforge.com/minecraft/modpacks/farwater-create-basic>)`,
+          value: `<:grassblock:1348651744686641234> Version: 1.20.1\nIP: \`${process.env.BASICS_IP}\`\n <:curseforge:1348353413221453997> [Curseforge](<https://www.curseforge.com/minecraft/modpacks/farwater-create-basic>)`,
         },
         {
           name: "Create: Arcane Engineering - <:forge:1348353401226006760> Forge",
-          value: `IP: \`${process.env.CAE_IP}\`\n <:curseforge:1348353413221453997> [Curseforge](<https://www.curseforge.com/minecraft/modpacks/create-arcane-engineering>)`,
+          value: `<:grassblock:1348651744686641234> Version: 1.18.2\nIP: \`${process.env.CAE_IP}\`\n <:curseforge:1348353413221453997> [Curseforge](<https://www.curseforge.com/minecraft/modpacks/create-arcane-engineering>)`,
         }
       );
 
