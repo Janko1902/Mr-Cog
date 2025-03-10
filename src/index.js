@@ -51,7 +51,7 @@ client.on("interactionCreate", (interaction) => {
     }
   }
 
-  if (interaction.commandName === "server") {
+  if (interaction.commandName === "servers") {
 
     const embed = new EmbedBuilder()
       .setTitle("Farwater Servers")
