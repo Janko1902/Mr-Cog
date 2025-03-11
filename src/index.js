@@ -23,12 +23,12 @@ client.on("ready", (c) => {
 client.on("interactionCreate", (interaction) => {
   if (!interaction.isChatInputCommand()) return;
 
+  const hasPermission = interaction.member.roles.cache.some((role) =>
+    ["Owner", "Founder", "Sendior Admin", "Admin", "Moderator"].includes(role.name)
+  );
+
   if (interaction.commandName === "ip") {
     const ip = interaction.options.get("server").value;
-
-    const hasPermission = interaction.member.roles.cache.some((role) =>
-      ["Owner", "Founder", "Sendior Admin", "Admin", "Moderator"].includes(role.name)
-    );
 
     if (ip === process.env.DDU_IP) {
       if (hasPermission) {
