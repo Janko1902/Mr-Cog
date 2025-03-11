@@ -18,6 +18,10 @@ const commands = [
           {
             name: "Create: Arcane Engineering",
             value: `${process.env.CAE_IP}`,
+          },
+          {
+            name: "Farwater: Deep Down Underground",
+            value: `${process.env.DDU_IP}`,
           }
         ],
         required: true,

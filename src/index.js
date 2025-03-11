@@ -25,34 +25,46 @@ client.on("interactionCreate", (interaction) => {
 
   if (interaction.commandName === "ip") {
     const ip = interaction.options.get("server").value;
-    
-    if (interaction.options.get("server").value === process.env.BASICS_IP) {
-      const embed = new EmbedBuilder()
-        .setColor("Random")
-        .addFields(
-          {
-            name: "Farwater: Create Basics",
-            value: `IP: ${ip}`
-          }
-        );
-      
-      interaction.reply({ embeds: [embed] });
-    } else {
-      const embed = new EmbedBuilder()
-        .setColor("Random")
-        .addFields(
-          {
-            name: "Create: Arcane Engineering",
-            value: `IP: ${ip}`
-          }
-        );
 
-      interaction.reply({ embeds: [embed] });
+    const hasPermission = interaction.member.roles.cache.some((role) =>
+      ["Owner", "Founder", "Sendior Admin", "Admin", "Moderator"].includes(role.name)
+    );
+
+    if (ip === process.env.DDU_IP) {
+      if (hasPermission) {
+        const embed = new EmbedBuilder()
+          .setColor("Random")
+          .addFields({
+            name: "Farwater: Deep Down Underground",
+            value: `IP: ${ip}`,
+          });
+
+        return interaction.reply({
+          embeds: [embed],
+          flags: MessageFlags.Ephemeral,
+        });
+      } else {
+        return interaction.reply({
+          content: "You don't have permission to access this IP!",
+          flags: MessageFlags.Ephemeral,
+        });
+      }
+    } else if (ip === process.env.BASICS_IP) {
+      const embed = new EmbedBuilder()
+        .setColor("Random")
+        .addFields({ name: "Farwater: Create Basics", value: `IP: ${ip}` });
+
+      return interaction.reply({ embeds: [embed] });
+    } else if (ip === process.env.CAE_IP) {
+      const embed = new EmbedBuilder()
+        .setColor("Random")
+        .addFields({ name: "Create: Arcane Engineering", value: `IP: ${ip}` });
+
+      return interaction.reply({ embeds: [embed] });
     }
   }
 
   if (interaction.commandName === "server") {
-
     const embed = new EmbedBuilder()
       .setTitle("Farwater Servers")
       .setColor("Random")
