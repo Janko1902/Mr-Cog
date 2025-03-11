@@ -32,6 +32,23 @@ const commands = [
     name: "servers",
     description: "Shows server info.",
   },
+  {
+    name: "help",
+    description: "Send help messages.",
+    options: [
+      {
+        name: "which",
+        description: "Which help message?",
+        type: ApplicationCommandOptionType.String,
+        choices: [
+          {
+            name: "Cracked Minecraft accounts",
+            value: "Cracked Minecraft accounts",
+          }
+        ],
+      },
+    ],
+  },
 ];
 
 const rest = new REST({ version: "10" }).setToken(process.env.TOKEN);

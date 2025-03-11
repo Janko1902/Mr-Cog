@@ -81,6 +81,16 @@ client.on("interactionCreate", (interaction) => {
 
     interaction.reply({ embeds: [embed] });
   }
+
+  if (interaction.commandName === "help" && hasPermission) {
+    if (interaction.options.get("which").value === "Cracked Minecraft accounts") {
+      const embed = new EmbedBuilder()
+        .setColor("Random")
+        .addFields({ name: "Cracked Minecraft accounts", value: "Sorry, but this server does not support cracked Minecraft accounts. You’ll need a valid, official Minecraft account to join." });
+      
+      interaction.reply({ embeds: [embed] });
+    }
+  }
 });
 
 client.login(process.env.TOKEN);
