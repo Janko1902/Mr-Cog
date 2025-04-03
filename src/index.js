@@ -24,7 +24,7 @@ client.on("interactionCreate", (interaction) => {
   if (!interaction.isChatInputCommand()) return;
 
   const hasPermission = interaction.member.roles.cache.some((role) =>
-    ["Owner", "Founder", "Sendior Admin", "Admin", "Moderator"].includes(role.name)
+    ["Owner", "Founder", "Sendior Admin", "Admin", "Moderator", "Alpha Tester"].includes(role.name)
   );
 
   if (interaction.commandName === "ip") {
@@ -71,11 +71,15 @@ client.on("interactionCreate", (interaction) => {
       .addFields(
         {
           name: "Farwater: Create Basics - <:fabric:1348353372012413000> Fabric",
-          value: `Whitelist: <:no:1357104048595271954>\nIP: \`${process.env.BASICS_IP}\`\n<:curseforge:1348353413221453997> [Curseforge](<https://www.curseforge.com/minecraft/modpacks/farwater-create-basic>)`,
+          value: `Whitelist: <:no:1357104048595271954>\n
+                  IP: \`${process.env.BASICS_IP}\`\n
+                  <:curseforge:1348353413221453997> [Curseforge](<https://www.curseforge.com/minecraft/modpacks/farwater-create-basic>)`,
         },
         {
           name: "Create: Arcane Engineering - <:forge:1348353401226006760> Forge",
-          value: `Whitelist: <:no:1357104048595271954>\nIP: \`${process.env.CAE_IP}\`\n<:curseforge:1348353413221453997> [Curseforge](<https://www.curseforge.com/minecraft/modpacks/create-arcane-engineering>)`,
+          value: `Whitelist: <:no:1357104048595271954>\n
+                  IP: \`${process.env.CAE_IP}\`\n
+                  <:curseforge:1348353413221453997> [Curseforge](<https://www.curseforge.com/minecraft/modpacks/create-arcane-engineering>)`,
         }
       );
 
@@ -83,10 +87,13 @@ client.on("interactionCreate", (interaction) => {
   }
 
   if (interaction.commandName === "help" && hasPermission) {
-    if (interaction.options.get("which").value === "Cracked Minecraft accounts") {
+    if (interaction.options.get("with").value === "Cracked Minecraft accounts") {
       const embed = new EmbedBuilder()
         .setColor("Random")
-        .addFields({ name: "Cracked Minecraft accounts", value: "Sorry, but this server does not support cracked Minecraft accounts. You’ll need a valid, official Minecraft account to join." });
+        .addFields({
+           name: "Cracked Minecraft accounts", 
+           value: "Sorry, but this server does not support cracked Minecraft accounts. You’ll need a valid, official Minecraft account to join." 
+        });
       
       interaction.reply({ embeds: [embed] });
     }

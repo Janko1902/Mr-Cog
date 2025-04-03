@@ -37,8 +37,8 @@ const commands = [
     description: "Send help messages.",
     options: [
       {
-        name: "which",
-        description: "Which help message?",
+        name: "with",
+        description: "Help with",
         type: ApplicationCommandOptionType.String,
         choices: [
           {
