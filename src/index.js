@@ -71,15 +71,11 @@ client.on("interactionCreate", (interaction) => {
       .addFields(
         {
           name: "Farwater: Create Basics - <:fabric:1348353372012413000> Fabric",
-          value: `Whitelist: <:no:1357104048595271954>\n
-                  IP: \`${process.env.BASICS_IP}\`\n
-                  <:curseforge:1348353413221453997> [Curseforge](<https://www.curseforge.com/minecraft/modpacks/farwater-create-basic>)`,
+          value: `Whitelist: <:no:1357104048595271954>\nIP: \`${process.env.BASICS_IP}\`\n<:curseforge:1348353413221453997> [Curseforge](<https://www.curseforge.com/minecraft/modpacks/farwater-create-basic>)`,
         },
         {
           name: "Create: Arcane Engineering - <:forge:1348353401226006760> Forge",
-          value: `Whitelist: <:no:1357104048595271954>\n
-                  IP: \`${process.env.CAE_IP}\`\n
-                  <:curseforge:1348353413221453997> [Curseforge](<https://www.curseforge.com/minecraft/modpacks/create-arcane-engineering>)`,
+          value: `Whitelist: <:no:1357104048595271954>\nIP: \`${process.env.CAE_IP}\`\n<:curseforge:1348353413221453997> [Curseforge](<https://www.curseforge.com/minecraft/modpacks/create-arcane-engineering>)`,
         }
       );
 
