@@ -49,6 +49,10 @@ const commands = [
       },
     ],
   },
+  {
+    name: "modping",
+    description: "Ping an online Moderator.",
+  },
 ];
 
 const rest = new REST({ version: "10" }).setToken(process.env.TOKEN);

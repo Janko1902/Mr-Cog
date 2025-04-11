@@ -1,4 +1,5 @@
 require("./register-commands.js");
+const { sendModPing } = require("./mod-ping.js");
 require("dotenv").config();
 const {
   Client,
@@ -20,7 +21,7 @@ client.on("ready", (c) => {
   console.log(`${c.user.tag} is online.`);
 });
 
-client.on("interactionCreate", (interaction) => {
+client.on("interactionCreate", async (interaction) => {
   if (!interaction.isChatInputCommand()) return;
 
   const hasPermission = interaction.member.roles.cache.some((role) =>
@@ -92,6 +93,28 @@ client.on("interactionCreate", (interaction) => {
         });
       
       interaction.reply({ embeds: [embed] });
+    }
+  }
+
+  if (interaction.isCommand() && interaction.commandName === "modping") {
+    await sendModPing(interaction);
+  }
+
+  if (interaction.isButton()) {
+    if (interaction.customId === "stopModPing") {
+      if (hasPermission) {
+        clearInterval(interaction.message.pingInterval);
+        await interaction.update({
+          content: "The mod ping has been stopped.",
+          components: [],
+        });
+        interaction.reply({ content: "Mod ping stopped successfully!", ephemeral: true });
+      } else {
+        interaction.reply({
+          content: "You do not have permission to stop the mod ping.",
+          ephemeral: true,
+        });
+      }
     }
   }
 });
