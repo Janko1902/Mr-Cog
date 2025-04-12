@@ -112,7 +112,7 @@ client.on("interactionCreate", async (interaction) => {
       } else {
         interaction.reply({
           content: "You do not have permission to stop the mod ping.",
-          ephemeral: true,
+          flags: MessageFlags.Ephemeral,
         });
       }
     }
