@@ -1,10 +1,18 @@
-const { ActionRowBuilder, ButtonBuilder, ButtonStyle, EmbedBuilder } = require("discord.js");
+const { MessageFlags, ActionRowBuilder, ButtonBuilder, ButtonStyle, EmbedBuilder } = require("discord.js");
 
 const sendModPing = async (interaction) => {
-  try {
-    const user = interaction.user;
-    const guild = interaction.guild;
+  const user = interaction.user;
 
+  if (isBlacklisted(user.id)) {
+    await interaction.reply({
+      content: "You are not allowed to use this command.",
+      flags: MessageFlags.Ephemeral,
+    });
+    return;
+  }
+
+  try {
+    const guild = interaction.guild;
     if (!guild) {
       console.error("Guild is undefined");
       return;
@@ -24,11 +32,15 @@ const sendModPing = async (interaction) => {
       fetchReply: true,
     });
 
-    const stopModPing = new ActionRowBuilder().addComponents(
+    const buttons = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
         .setCustomId("stopModPing")
         .setLabel("Stop Mod Ping")
-        .setStyle(ButtonStyle.Danger)
+        .setStyle(ButtonStyle.Danger),
+      new ButtonBuilder()
+        .setCustomId("blacklistUser")
+        .setLabel("Blacklist User")
+        .setStyle(ButtonStyle.Secondary)
     );
 
     const modEmbed = new EmbedBuilder()
@@ -40,50 +52,66 @@ const sendModPing = async (interaction) => {
     const pingMessage = await channel.send({
       content: modUserIds.map(userId => `<@${userId}>`).join(" "), 
       embeds: [modEmbed],
-      components: [stopModPing],
+      components: [buttons],
     });
 
     const messageLink = replyMessage.url;
 
-    const updatedModEmbed = new EmbedBuilder()
-      .setColor("Blue")
-      .setTitle("**Mod Ping**")
-      .setDescription(`A mod ping has been activated. [Click here to view](${messageLink}).`)
-      .setFooter({ text: `Triggered by: ${user.tag}`, iconURL: user.displayAvatarURL() });
+    const updatedModEmbed = EmbedBuilder.from(modEmbed).setDescription(
+      `A mod ping has been activated. [Click here to view](${messageLink}).`
+    );
 
     await pingMessage.edit({
       embeds: [updatedModEmbed],
-      components: [stopModPing], 
+      components: [buttons],
     });
 
     pingMessage.pingInterval = setInterval(async () => {
-      await pingMods(channel, modUserIds, messageLink); 
+      await pingMods(channel, modUserIds, messageLink);
     }, 60000);
 
-    console.log("Mod ping sent successfully!");
-
-    const filter = i => i.customId === 'stopModPing' && modUserIds.includes(i.user.id);
     const collector = pingMessage.createMessageComponentCollector({
-      filter,
       time: 60000,
     });
 
-    collector.on('collect', async (i) => {
-      await i.deferUpdate();
+    collector.on("collect", async (i) => {
+      if (!modUserIds.includes(i.user.id)) {
+        if (!modUserIds.includes(i.user.id)) {
+          return i.reply({
+            content: "You are not authoized to use this button.",
+            flags: MessageFlags.Ephemeral,
+          })
+        }
+      }
 
+      if (i.customId === "stopModPing") {
+        clearInterval(pingMessage.pingInterval);
+
+        const resolvedEmbed = new EmbedBuilder()
+          .setColor("Green")
+          .setTitle("**Mod Ping Resolved**")
+          .setDescription("The issue has been resolved. Thank you for your patience!");
+
+        await replyMessage.edit({
+          embeds: [resolvedEmbed],
+          components: [],
+        });
+
+        await pingMessage.edit({ components: [] });
+
+        await i.update({ content: "Mod ping stopped.", components: [] });
+      }
+
+      if (i.customId === "blacklistUser") {
+        addToBlacklist(user.id);
+        await i.reply({
+           content: `<@${user.id}> has been blacklisted from using /modping.`,
+          });
+      }
+    });
+
+    collector.on("end", () => {
       clearInterval(pingMessage.pingInterval);
-
-      const updatedEmbed = new EmbedBuilder()
-        .setColor("Green")
-        .setTitle("**Mod Ping Resolved**")
-        .setDescription("The issue has been resolved. Thank you for your patience!");
-
-      await replyMessage.edit({
-        embeds: [updatedEmbed],
-        components: [],
-      });
-
-      await channel.send("The issue has been resolved.");
     });
 
   } catch (error) {
