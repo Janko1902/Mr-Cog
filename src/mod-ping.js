@@ -1,5 +1,7 @@
 const { MessageFlags, ActionRowBuilder, ButtonBuilder, ButtonStyle, EmbedBuilder } = require("discord.js");
 
+const { isBlacklisted, addToBlacklist } = require("./blacklist.js");
+
 const sendModPing = async (interaction) => {
   const user = interaction.user;
 

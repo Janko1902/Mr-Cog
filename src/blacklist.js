@@ -1,7 +1,7 @@
 const fs = require("fs");
 const path = require("path");
 
-const blacklistPath = path.join(__dirname, "blacklist.json");
+const blacklistPath = path.join(__dirname, "..", "blacklist.json");
 
 const getBlacklist = () => {
   if (!fs.existsSync(blacklistPath)) return [];
