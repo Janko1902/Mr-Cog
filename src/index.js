@@ -25,7 +25,14 @@ client.on("interactionCreate", async (interaction) => {
   if (!interaction.isChatInputCommand()) return;
 
   const hasPermission = interaction.member.roles.cache.some((role) =>
-    ["Owner", "Founder", "Sendior Admin", "Admin", "Moderator", "Alpha Tester"].includes(role.name)
+    [
+      "Owner",
+      "Founder",
+      "Sendior Admin",
+      "Admin",
+      "Moderator",
+      "Alpha Tester",
+    ].includes(role.name)
   );
 
   if (interaction.commandName === "ip") {
@@ -60,6 +67,28 @@ client.on("interactionCreate", async (interaction) => {
       const embed = new EmbedBuilder()
         .setColor("Random")
         .addFields({ name: "Create: Arcane Engineering", value: `IP: ${ip}` });
+
+      return interaction.reply({ embeds: [embed] });
+    }
+  }
+
+  if (interaction.commandName === "modpack") {
+    const modpack = interaction.options.get("modpack").value;
+
+    if (modpack === "Basics") {
+      const embed = new EmbedBuilder().setColor("Random").addFields({
+        name: "Farwater: Create Basics modpack",
+        value: `<:curseforge:1348353413221453997> [Curseforge](<https://www.curseforge.com/minecraft/modpacks/farwater-create-basic>)\n<:modrinth:1348353426052091995> [Modrinth](https://modrinth.com/modpack/farwater-create-basics)`,
+      });
+
+      return interaction.reply({ embeds: [embed] });
+    } else if (modpack === "CAE") {
+      const embed = new EmbedBuilder()
+        .setColor("Random")
+        .addFields({
+          name: "Cerate: Arcane Engineering modpack",
+          value: `<:curseforge:1348353413221453997> [Curseforge](<https://www.curseforge.com/minecraft/modpacks/create-arcane-engineering>)`,
+        });
 
       return interaction.reply({ embeds: [embed] });
     }
@@ -108,7 +137,10 @@ client.on("interactionCreate", async (interaction) => {
           content: "The mod ping has been stopped.",
           components: [],
         });
-        interaction.reply({ content: "Mod ping stopped successfully!", ephemeral: true });
+        interaction.reply({
+          content: "Mod ping stopped successfully!",
+          flags: MessageFlags.Ephemeral,
+        });
       } else {
         interaction.reply({
           content: "You do not have permission to stop the mod ping.",

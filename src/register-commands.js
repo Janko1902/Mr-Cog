@@ -29,6 +29,28 @@ const commands = [
     ],
   },
   {
+    name: "modpack",
+    description: "Shows the selected modpack.",
+    options: [
+      {
+        name: "modpack",
+        description: "Which modpack.",
+        type: ApplicationCommandOptionType.String,
+        choices: [
+          {
+            name: "Farwater: Create Basics",
+            value: `Basics`,
+          },
+          {
+            name: "Create: Arcane Engineering",
+            value: `CAE`,
+          }
+        ],
+        required: true,
+      },
+    ],
+  },
+  {
     name: "servers",
     description: "Shows server info.",
   },
