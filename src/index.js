@@ -86,7 +86,7 @@ client.on("interactionCreate", async (interaction) => {
       const embed = new EmbedBuilder()
         .setColor("Random")
         .addFields({
-          name: "Cerate: Arcane Engineering modpack",
+          name: "Create: Arcane Engineering modpack",
           value: `<:curseforge:1348353413221453997> [Curseforge](<https://www.curseforge.com/minecraft/modpacks/create-arcane-engineering>)`,
         });
 
