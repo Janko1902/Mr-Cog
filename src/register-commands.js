@@ -66,6 +66,10 @@ const commands = [
           {
             name: "Cracked Minecraft accounts",
             value: "Cracked Minecraft accounts",
+          },
+          {
+            name: "Whitelist",
+            value: "Whitelist",
           }
         ],
       },

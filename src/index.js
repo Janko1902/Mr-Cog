@@ -122,6 +122,15 @@ client.on("interactionCreate", async (interaction) => {
         });
       
       interaction.reply({ embeds: [embed] });
+    } else if (interaction.options.get("with").value === "Whitelist") {
+      const embed = new EmbedBuilder()
+        .setColor("Random")
+        .addFields({
+           name: "Whitelist", 
+           value: "Whitelist will reopen once Farwater: Deep Down Underground (season 11) releases. You do not need to get whitelisted to play on Farwater: Create Basics and Create: Arcane Engineering server." 
+        });
+      
+      interaction.reply({ embeds: [embed] });
     }
   }
 
