@@ -131,6 +131,15 @@ client.on("interactionCreate", async (interaction) => {
         });
       
       interaction.reply({ embeds: [embed] });
+    } else if (interaction.options.get("with").value === "Joining Farwater") {
+      const embed = new EmbedBuilder()
+        .setColor("Random")
+        .addFields({
+           name: "To join Farwater, follow these steps:", 
+           value: "**Chose a server:** First, decide which server you want to play on. We have multiple servers available.\n**Download the modpack:** Once you've chosen a server, download the corresponding modpack.\n**Join the server:** After installing the modpack, join the server using its IP.\n\n**Helpful commands:**\n`/servers` - Displays all Farwater servers along with details like IP and modpacks.\n`/modpack` - Provides the download link for selected modpack.\n`/ip` - Shows the IP for the selected server." 
+        });
+      
+      interaction.reply({ embeds: [embed] });
     }
   }
 

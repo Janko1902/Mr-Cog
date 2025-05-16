@@ -70,6 +70,10 @@ const commands = [
           {
             name: "Whitelist",
             value: "Whitelist",
+          },
+          {
+            name: "Joining Farwater",
+            value: "Joining Farwater",
           }
         ],
       },
