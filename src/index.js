@@ -69,6 +69,12 @@ client.on("interactionCreate", async (interaction) => {
         .addFields({ name: "Create: Arcane Engineering", value: `IP: ${ip}` });
 
       return interaction.reply({ embeds: [embed] });
+    } else if (ip === process.env.HOMESTEAD_IP) {
+      const embed = new EmbedBuilder()
+        .setColor("Random")
+        .addFields({ name: "Homestead", value: `IP: ${ip}` });
+
+      return interaction.reply({ embeds: [embed] });
     }
   }
 
@@ -78,7 +84,7 @@ client.on("interactionCreate", async (interaction) => {
     if (modpack === "Basics") {
       const embed = new EmbedBuilder().setColor("Random").addFields({
         name: "Farwater: Create Basics modpack",
-        value: `<:modrinth:1348353426052091995> [Modrinth](https://modrinth.com/modpack/farwater-create-basics)`,
+        value: `<:modrinth:1348353426052091995> [Modrinth](<https://modrinth.com/modpack/farwater-create-basics>)`,
       });
 
       return interaction.reply({ embeds: [embed] });
@@ -88,6 +94,15 @@ client.on("interactionCreate", async (interaction) => {
         .addFields({
           name: "Create: Arcane Engineering modpack",
           value: `<:curseforge:1348353413221453997> [Curseforge](<https://www.curseforge.com/minecraft/modpacks/create-arcane-engineering>)`,
+        });
+
+      return interaction.reply({ embeds: [embed] });
+    } else if (modpack === "Homestead") {
+      const embed = new EmbedBuilder()
+        .setColor("Random")
+        .addFields({
+          name: "Homestead modpack",
+          value: `<:curseforge:1348353413221453997> [Curseforge](<https://www.curseforge.com/minecraft/modpacks/homestead-cozy>)\n<:modrinth:1348353426052091995> [Modrinth](<https://modrinth.com/modpack/homestead>)`,
         });
 
       return interaction.reply({ embeds: [embed] });
@@ -106,6 +121,10 @@ client.on("interactionCreate", async (interaction) => {
         {
           name: "Create: Arcane Engineering - <:forge:1348353401226006760> Forge",
           value: `Whitelist: <:no:1357104048595271954>\nIP: \`${process.env.CAE_IP}\`\n<:curseforge:1348353413221453997> [Curseforge](<https://www.curseforge.com/minecraft/modpacks/create-arcane-engineering>)`,
+        },
+        {
+          name: "Homestead - <:fabric:1348353372012413000> Fabric",
+          value: `Whitelist: <:no:1357104048595271954>\nIP: \`${process.env.HOMESTEAD_IP}\`\n<:curseforge:1348353413221453997> [Curseforge](<https://www.curseforge.com/minecraft/modpacks/homestead-cozy>)\n<:modrinth:1348353426052091995> [Modrinth](<https://modrinth.com/modpack/homestead>)`,
         }
       );
 
@@ -136,7 +155,7 @@ client.on("interactionCreate", async (interaction) => {
         .setColor("Random")
         .addFields({
            name: "To join Farwater, follow these steps:", 
-           value: "**Chose a server:** First, decide which server you want to play on. We have multiple servers available.\n**Download the modpack:** Once you've chosen a server, download the corresponding modpack.\n**Join the server:** After installing the modpack, join the server using its IP.\n\n**Helpful commands:**\n`/servers` - Displays all Farwater servers along with details like IP and modpacks.\n`/modpack` - Provides the download link for selected modpack.\n`/ip` - Shows the IP for the selected server." 
+           value: "**Choose a server:** First, decide which server you want to play on. We have multiple servers available.\n**Download the modpack:** Once you've chosen a server, download the corresponding modpack.\n**Join the server:** After installing the modpack, join the server using its IP.\n\n**Helpful commands:**\n`/servers` - Displays all Farwater servers along with details like IP and modpacks.\n`/modpack` - Provides the download link for selected modpack.\n`/ip` - Shows the IP for the selected server." 
         });
       
       interaction.reply({ embeds: [embed] });
