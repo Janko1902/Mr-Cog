@@ -16,10 +16,6 @@ const commands = [
             value: `${process.env.BASICS_IP}`,
           },
           {
-            name: "Create: Arcane Engineering",
-            value: `${process.env.CAE_IP}`,
-          },
-          {
             name: "Homestead",
             value: `${process.env.HOMESTEAD_IP}`,
           },
@@ -44,10 +40,6 @@ const commands = [
           {
             name: "Farwater: Create Basics",
             value: `Basics`,
-          },
-          {
-            name: "Create: Arcane Engineering",
-            value: `CAE`,
           },
           {
             name: "Homestead",
