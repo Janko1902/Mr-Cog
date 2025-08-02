@@ -127,7 +127,7 @@ client.on("interactionCreate", async (interaction) => {
         .setColor("Random")
         .addFields({
            name: "Whitelist", 
-           value: "Whitelist will reopen once Farwater: Deep Down Underground (season 11) releases. You do not need to get whitelisted to play on any of our current servers. If a server requires whitelist there will be `<:yes:1357104035361984532>` on `/servers`" 
+           value: "Whitelist will reopen once Farwater: Deep Down Underground (season 11) releases. You do not need to get whitelisted to play on any of our current servers. If a server requires whitelist it will state that on `/servers`" 
         });
       
       interaction.reply({ embeds: [embed] });
