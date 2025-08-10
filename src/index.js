@@ -201,14 +201,7 @@ client.on("interactionCreate", async (interaction) => {
   }
   
   if (interaction.isCommand() && interaction.commandName === "modping") {
-    if (!interaction.inGuild() || interaction.guildId !== process.env.GUILD_ID) {
-      return interaction.reply({
-        content: "This command only works in the Farwater server!",
-        flags: MessageFlags.Ephemeral,
-      });
-    } else {
-      await sendModPing(interaction);
-    }
+    await sendModPing(interaction);
   }
 
   if (interaction.isButton()) {
