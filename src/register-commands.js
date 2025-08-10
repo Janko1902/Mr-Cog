@@ -12,6 +12,7 @@ const global_commands = [
   {
     name: "ip",
     description: "Shows the selected IP.",
+    contexts: [0, 1, 2],
     options: [
       {
         name: "server",
@@ -42,6 +43,7 @@ const global_commands = [
   {
     name: "modpack",
     description: "Shows the selected modpack.",
+    contexts: [0, 1, 2],
     options: [
       {
         name: "modpack",
@@ -68,6 +70,7 @@ const global_commands = [
   {
     name: "servers",
     description: "Shows server info.",
+    contexts: [0, 1, 2],
     options: [
       {
         name: "server",
@@ -93,6 +96,7 @@ const global_commands = [
   {
     name: "help",
     description: "Send help messages.",
+    contexts: [0, 1, 2],
     options: [
       {
         name: "with",
