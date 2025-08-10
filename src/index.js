@@ -19,6 +19,14 @@ const client = new Client({
 
 client.on("ready", (c) => {
   console.log(`${c.user.tag} is online.`);
+
+  client.user.setPresence({
+    activities: [{
+      name: "to Farwater players",
+      type: 2
+    }],
+    status: "online",
+  });
 });
 
 client.on("interactionCreate", async (interaction) => {
