@@ -22,7 +22,7 @@ client.on("ready", (c) => {
 
   client.user.setPresence({
     activities: [{
-      name: "to Farwater players",
+      name: "Farwater players",
       type: 2
     }],
     status: "online",
