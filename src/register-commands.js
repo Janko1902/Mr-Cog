@@ -12,6 +12,10 @@ const commands = [
         type: ApplicationCommandOptionType.String,
         choices: [
           {
+            name: "Farwater: Deep Down Underground",
+            value: `${process.env.DDU_IP}`,
+          },
+          {
             name: "Farwater: Create Basics",
             value: `${process.env.BASICS_IP}`,
           },
@@ -20,8 +24,8 @@ const commands = [
             value: `${process.env.HOMESTEAD_IP}`,
           },
           {
-            name: "Farwater: Deep Down Underground",
-            value: `${process.env.DDU_IP}`,
+            name: "ATM 10",
+            value: `${process.env.ATM_10_IP}`,
           }
         ],
         required: true,
@@ -44,6 +48,10 @@ const commands = [
           {
             name: "Homestead",
             value: `Homestead`,
+          },
+          {
+            name: "ATM 10",
+            value: `ATM`,
           }
         ],
         required: true,

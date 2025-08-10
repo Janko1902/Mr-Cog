@@ -69,6 +69,12 @@ client.on("interactionCreate", async (interaction) => {
         .addFields({ name: "Homestead", value: `IP: ${ip}` });
 
       return interaction.reply({ embeds: [embed] });
+    } else if (ip === process.env.ATM_10_IP) {
+      const embed = new EmbedBuilder()
+        .setColor("Random")
+        .addFields({ name: "All the Mods 10", value: `IP: ${ip}` });
+
+      return interaction.reply({ embeds: [embed] });
     }
   }
 
@@ -91,6 +97,13 @@ client.on("interactionCreate", async (interaction) => {
         });
 
       return interaction.reply({ embeds: [embed] });
+    } else if (modpack === "ATM") {
+      const embed = new EmbedBuilder().setColor("Random").addFields({
+        name: "All the Mods 10 modpack",
+        value: `<:curseforge:1348353413221453997> [Curseforge](<https://www.curseforge.com/minecraft/modpacks/all-the-mods-10>)`,
+      });
+
+      return interaction.reply({ embeds: [embed] });
     }
   }
 
@@ -106,6 +119,10 @@ client.on("interactionCreate", async (interaction) => {
         {
           name: "Homestead - <:fabric:1348353372012413000> Fabric",
           value: `Whitelist: <:no:1357104048595271954>\nIP: \`${process.env.HOMESTEAD_IP}\`\n<:curseforge:1348353413221453997> [Curseforge](<https://www.curseforge.com/minecraft/modpacks/homestead-cozy>)\n<:modrinth:1348353426052091995> [Modrinth](<https://modrinth.com/modpack/homestead>)`,
+        },
+        {
+          name: "All the Mods 10 - <:neoforged:1404088666120257737> NeoForged",
+          value: `Whitelist: <:no:1357104048595271954>\nIP: \`${process.env.ATM_10_IP}\`\n<:curseforge:1348353413221453997> [Curseforge](<https://www.curseforge.com/minecraft/modpacks/all-the-mods-10>)`,
         }
       );
 
