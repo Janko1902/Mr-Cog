@@ -5,6 +5,7 @@ const commands = [
   {
     name: "ip",
     description: "Shows the selected IP.",
+    dm_permission: true,
     options: [
       {
         name: "server",
@@ -35,6 +36,7 @@ const commands = [
   {
     name: "modpack",
     description: "Shows the selected modpack.",
+    dm_permission: true,
     options: [
       {
         name: "modpack",
@@ -65,6 +67,7 @@ const commands = [
   {
     name: "help",
     description: "Send help messages.",
+    dm_permission: true,
     options: [
       {
         name: "with",
@@ -90,6 +93,7 @@ const commands = [
   {
     name: "modping",
     description: "Ping an online Moderator.",
+    dm_permission: false,
   },
 ];
 
@@ -100,10 +104,7 @@ const rest = new REST({ version: "10" }).setToken(process.env.TOKEN);
     console.log("Registering slash commands...");
 
     await rest.put(
-      Routes.applicationGuildCommands(
-        process.env.CLIENT_ID,
-        process.env.GUILD_ID
-      ),
+      Routes.applicationCommands(process.env.CLIENT_ID),
       { body: commands }
     );
 
@@ -111,4 +112,4 @@ const rest = new REST({ version: "10" }).setToken(process.env.TOKEN);
   } catch (error) {
     console.log(`There was an error: ${error}`);
   }
-})();
+});

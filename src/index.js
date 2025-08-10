@@ -24,22 +24,29 @@ client.on("ready", (c) => {
 client.on("interactionCreate", async (interaction) => {
   if (!interaction.isChatInputCommand()) return;
 
-  const hasPermission = interaction.member.roles.cache.some((role) =>
-    [
-      "Owner",
-      "Founder",
-      "Sendior Admin",
-      "Admin",
-      "Moderator",
-      "Alpha Tester",
-    ].includes(role.name)
-  );
+  if (interaction.inGuild()) {
+    const hasPermission = interaction.member.roles.cache.some((role) =>
+      [
+        "Owner",
+        "Founder",
+        "Sendior Admin",
+        "Admin",
+        "Moderator",
+        "Alpha Tester",
+      ].includes(role.name)
+    );
+  }
 
   if (interaction.commandName === "ip") {
     const ip = interaction.options.get("server").value;
 
     if (ip === process.env.DDU_IP) {
-      if (hasPermission) {
+      if (!interaction.inGuild() || interaction.guildId !== process.env.GUILD_ID) {
+        return interaction.reply({
+          content: "This command only works in the Farwater server if you have required permissions!",
+          flags: MessageFlags.Ephemeral,
+        });
+      } else if (hasPermission) {
         const embed = new EmbedBuilder()
           .setColor("Random")
           .addFields({
@@ -129,7 +136,7 @@ client.on("interactionCreate", async (interaction) => {
     interaction.reply({ embeds: [embed] });
   }
 
-  if (interaction.commandName === "help" && hasPermission) {
+  if (interaction.commandName === "help") {
     if (interaction.options.get("with").value === "Cracked Minecraft accounts") {
       const embed = new EmbedBuilder()
         .setColor("Random")
@@ -159,9 +166,16 @@ client.on("interactionCreate", async (interaction) => {
       interaction.reply({ embeds: [embed] });
     }
   }
-
+  
   if (interaction.isCommand() && interaction.commandName === "modping") {
-    await sendModPing(interaction);
+    if (!interaction.inGuild() || interaction.guildId !== process.env.GUILD_ID) {
+      return interaction.reply({
+        content: "This command only works in the Farwater server!",
+        flags: MessageFlags.Ephemeral,
+      });
+    } else {
+      await sendModPing(interaction);
+    }
   }
 
   if (interaction.isButton()) {
