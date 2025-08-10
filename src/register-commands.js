@@ -12,7 +12,6 @@ const global_commands = [
   {
     name: "ip",
     description: "Shows the selected IP.",
-    //dm_permission: true,
     options: [
       {
         name: "server",
@@ -43,7 +42,6 @@ const global_commands = [
   {
     name: "modpack",
     description: "Shows the selected modpack.",
-    //dm_permission: true,
     options: [
       {
         name: "modpack",
@@ -70,7 +68,6 @@ const global_commands = [
   {
     name: "servers",
     description: "Shows server info.",
-    //dm_permission: true,
     options: [
       {
         name: "server",
@@ -96,7 +93,6 @@ const global_commands = [
   {
     name: "help",
     description: "Send help messages.",
-    //dm_permission: true,
     options: [
       {
         name: "with",
