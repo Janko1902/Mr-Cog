@@ -1,11 +1,18 @@
 require("dotenv").config();
 const { REST, Routes, ApplicationCommandOptionType } = require("discord.js");
 
-const commands = [
+const guild_commands = [
+  {
+    name: "modping",
+    description: "Ping an online Moderator.",
+  },
+];
+
+const global_commands = [
   {
     name: "ip",
     description: "Shows the selected IP.",
-    dm_permission: true,
+    //dm_permission: true,
     options: [
       {
         name: "server",
@@ -36,7 +43,7 @@ const commands = [
   {
     name: "modpack",
     description: "Shows the selected modpack.",
-    dm_permission: true,
+    //dm_permission: true,
     options: [
       {
         name: "modpack",
@@ -63,11 +70,33 @@ const commands = [
   {
     name: "servers",
     description: "Shows server info.",
+    //dm_permission: true,
+    options: [
+      {
+        name: "server",
+        description: "Which server.",
+        type: ApplicationCommandOptionType.String,
+        choices: [
+          {
+            name: "Farwater: Create Basics",
+            value: `Basics`,
+          },
+          {
+            name: "Homestead",
+            value: `Homestead`,
+          },
+          {
+            name: "ATM 10",
+            value: `ATM`,
+          }
+        ],
+      },
+    ],
   },
   {
     name: "help",
     description: "Send help messages.",
-    dm_permission: true,
+    //dm_permission: true,
     options: [
       {
         name: "with",
@@ -87,13 +116,9 @@ const commands = [
             value: "Joining Farwater",
           }
         ],
+        required: true,
       },
     ],
-  },
-  {
-    name: "modping",
-    description: "Ping an online Moderator.",
-    dm_permission: false,
   },
 ];
 
@@ -101,15 +126,20 @@ const rest = new REST({ version: "10" }).setToken(process.env.TOKEN);
 
 (async () => {
   try {
-    console.log("Registering slash commands...");
+    console.log("Registering guild commands...");
+    await rest.put(
+      Routes.applicationGuildCommands(process.env.CLIENT_ID, process.env.GUILD_ID),
+      { body: guild_commands }
+    );
+    console.log("Guild commands registered!");
 
+    console.log("Registering global commands...");
     await rest.put(
       Routes.applicationCommands(process.env.CLIENT_ID),
-      { body: commands }
+      { body: global_commands }
     );
-
-    console.log("Registered slash commands!");
+    console.log("Global commands registered!");
   } catch (error) {
-    console.log(`There was an error: ${error}`);
+    console.error("There was an error registering commands:", error);
   }
-});
+})();
