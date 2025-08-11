@@ -17,16 +17,40 @@ const client = new Client({
   ],
 });
 
-client.on("ready", (c) => {
-  console.log(`${c.user.tag} is online.`);
-
-  client.user.setPresence({
+const statuses = [
+  {
     activities: [{
       name: "Farwater players",
       type: 2
     }],
     status: "online",
-  });
+  },
+  {
+    activities: [{ 
+      name: "Minecraft", 
+      type: 0 
+    }],
+    status: "online",
+  },
+  {
+    activities: [{ 
+      name: "Farwater", 
+      type: 3 
+    }],
+    status: "online",
+  },
+]
+
+function randomizeStatus() {
+  const status = statuses[Math.floor(Math.random() * statuses.length)];
+  client.user.setPresence(status);
+}
+
+client.on("ready", (c) => {
+  console.log(`${c.user.tag} is online.`);
+
+  randomizeStatus();
+  setInterval(randomizeStatus, 600000);
 });
 
 client.on("interactionCreate", async (interaction) => {
