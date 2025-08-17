@@ -36,7 +36,7 @@ client.on("messageDelete", async (msg) => {
         "Crazy? {author} was crazy once. They locked {author} in a room. A rubber room with {user}. And {user} made {author} crazy",
         "{author} said soup to {user}",
         "{author} said <:soup:1406663240280445019> to {user}",
-        "{user} un-souped {author}",
+        "{author} un-souped {user}",
     ]
 
     let chosenEmbed = descriptions[Math.floor(Math.random() * descriptions.length)]
