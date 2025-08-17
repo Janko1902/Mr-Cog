@@ -17,6 +17,10 @@ const client = new Client({
   ],
 });
 
+module.exports = client;
+
+require("./ghost-ping.js");
+
 const statuses = [
   {
     activities: [{
