@@ -33,7 +33,6 @@ client.on("messageDelete", async (msg) => {
         "{author} woke {user} up",
         "{user} was kicked by the wandering {author}",
         "{author} demonstrated boop on {user}",
-        "Crazy? {author} was crazy once. They locked {author} in a room. A rubber room with {user}. And {user} made {author} crazy",
         "{author} said soup to {user}",
         "{author} said <:soup:1406663240280445019> to {user}",
         "{author} un-souped {user}",
