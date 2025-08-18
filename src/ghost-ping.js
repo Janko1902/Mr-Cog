@@ -38,12 +38,18 @@ client.on("messageDelete", async (msg) => {
         "{author} un-souped {user}",
         "{author} hooted at {user}",
         "{author} gave a hoot to {user}",
+        "{author} whispered a ping to {user}",
+        "{author}'s message haunted {user}",
+        "{user} received a mysterious signal from {author}",
+        "{author} whispered something to {user}",
+        "{author} booped {user} and ran!",
+        "{author} summoned {user}",
     ]
 
     let chosenEmbed = descriptions[Math.floor(Math.random() * descriptions.length)]
 
-    chosenEmbed = chosenEmbed.replace("{author}", `<@${cached.author}>`);
-    chosenEmbed = chosenEmbed.replace("{user}", user);
+    chosenEmbed = chosenEmbed.replaceAll("{author}", `<@${cached.author}>`);
+    chosenEmbed = chosenEmbed.replaceAll("{user}", user);
 
     const embed = new EmbedBuilder()
         .setColor("#ff4949")
