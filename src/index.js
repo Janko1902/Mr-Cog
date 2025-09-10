@@ -1,4 +1,5 @@
 require("./register-commands.js");
+const { checkAllFeeds } = require("./feeds.js");
 const { sendModPing } = require("./mod-ping.js");
 require("dotenv").config();
 const {
@@ -54,7 +55,8 @@ client.on("ready", (c) => {
   console.log(`${c.user.tag} is online.`);
 
   randomizeStatus();
-  setInterval(randomizeStatus, 600000);
+  setInterval(randomizeStatus, 600000); //10 Min
+  setInterval(() => checkAllFeeds(client), 300000); //5 Min 
 });
 
 client.on("interactionCreate", async (interaction) => {
