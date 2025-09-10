@@ -15,7 +15,7 @@ let lastLinks = {};
 try {
   lastLinks = JSON.parse(fs.readFileSync(jsonPath, 'utf8'));
 } catch (err) {
-  console.warn('Could not load lastLinks.json, initializing default:', err.message);
+  console.warn('Could not load last-links.json, initializing default:', err.message);
   lastLinks = { youtube: null, twitter: null, instagram: null };
 }
 
