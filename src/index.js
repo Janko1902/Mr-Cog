@@ -106,12 +106,6 @@ client.on("interactionCreate", async (interaction) => {
         .addFields({ name: "Farwater: Create Basics", value: `IP: ${ip}` });
 
       return interaction.reply({ embeds: [embed] });
-    } else if (ip === process.env.HOMESTEAD_IP) {
-      const embed = new EmbedBuilder()
-        .setColor("Random")
-        .addFields({ name: "Homestead", value: `IP: ${ip}` });
-
-      return interaction.reply({ embeds: [embed] });
     } else if (ip === process.env.ATM_10_IP) {
       const embed = new EmbedBuilder()
         .setColor("Random")
@@ -129,15 +123,6 @@ client.on("interactionCreate", async (interaction) => {
         name: "Farwater: Create Basics modpack",
         value: `<:modrinth:1348353426052091995> [Modrinth](<https://modrinth.com/modpack/farwater-create-basics>)`,
       });
-
-      return interaction.reply({ embeds: [embed] });
-    } else if (modpack === "Homestead") {
-      const embed = new EmbedBuilder()
-        .setColor("Random")
-        .addFields({
-          name: "Homestead modpack",
-          value: `<:curseforge:1348353413221453997> [Curseforge](<https://www.curseforge.com/minecraft/modpacks/homestead-cozy>)\n<:modrinth:1348353426052091995> [Modrinth](<https://modrinth.com/modpack/homestead>)`,
-        });
 
       return interaction.reply({ embeds: [embed] });
     } else if (modpack === "ATM") {
@@ -166,15 +151,6 @@ client.on("interactionCreate", async (interaction) => {
       });
 
       return interaction.reply({ embeds: [embed] });
-    } else if (server === "Homestead") {
-      const embed = new EmbedBuilder()
-        .setColor("Random")
-        .addFields({
-          name: "Homestead - <:fabric:1348353372012413000> Fabric",
-          value: `Whitelist: <:no:1357104048595271954>\nIP: \`${process.env.HOMESTEAD_IP}\`\n<:curseforge:1348353413221453997> [Curseforge](<https://www.curseforge.com/minecraft/modpacks/homestead-cozy>)\n<:modrinth:1348353426052091995> [Modrinth](<https://modrinth.com/modpack/homestead>)`,
-        });
-
-      return interaction.reply({ embeds: [embed] });
     } else if (server === "ATM") {
       const embed = new EmbedBuilder().setColor("Random").addFields({
         name: "All the Mods 10 - <:neoforged:1404088666120257737> NeoForged",
@@ -190,10 +166,6 @@ client.on("interactionCreate", async (interaction) => {
           {
             name: "Farwater: Create Basics - <:fabric:1348353372012413000> Fabric",
             value: `Whitelist: <:no:1357104048595271954>\nIP: \`${process.env.BASICS_IP}\`\n<:modrinth:1348353426052091995> [Modrinth](https://modrinth.com/modpack/farwater-create-basics)`,
-          },
-          {
-            name: "Homestead - <:fabric:1348353372012413000> Fabric",
-            value: `Whitelist: <:no:1357104048595271954>\nIP: \`${process.env.HOMESTEAD_IP}\`\n<:curseforge:1348353413221453997> [Curseforge](<https://www.curseforge.com/minecraft/modpacks/homestead-cozy>)\n<:modrinth:1348353426052091995> [Modrinth](<https://modrinth.com/modpack/homestead>)`,
           },
           {
             name: "All the Mods 10 - <:neoforged:1404088666120257737> NeoForged",

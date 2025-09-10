@@ -82,10 +82,6 @@ const global_commands = [
             value: `Basics`,
           },
           {
-            name: "Homestead",
-            value: `Homestead`,
-          },
-          {
             name: "ATM 10",
             value: `ATM`,
           }
