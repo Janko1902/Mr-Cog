@@ -56,7 +56,7 @@ client.on("ready", (c) => {
 
   randomizeStatus();
   setInterval(randomizeStatus, 600000); //10 Min
-  setInterval(() => checkAllFeeds(client), 60000); //1 Min 
+  //setInterval(() => checkAllFeeds(client), 60000); //1 Min 
 });
 
 client.on("interactionCreate", async (interaction) => {
