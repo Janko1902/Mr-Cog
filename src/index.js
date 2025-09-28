@@ -147,17 +147,33 @@ client.on("interactionCreate", async (interaction) => {
     }
 
     if (server === "Basics") {
-      const embed = new EmbedBuilder().setColor("Random").addFields({
-        name: "Farwater: Create Basics - <:fabric:1348353372012413000> Fabric",
-        value: `Whitelist: <:no:1357104048595271954>\nIP: \`${process.env.BASICS_IP}\`\n<:modrinth:1348353426052091995> [Modrinth](https://modrinth.com/modpack/farwater-create-basics)`,
-      });
+      const embed = new EmbedBuilder()
+        .setColor("Random")
+        .addFields(
+          {
+            name: "Farwater: Create Basics - <:fabric:1348353372012413000> Fabric",
+            value: `Whitelist: <:no:1357104048595271954>\nIP: \`${process.env.BASICS_IP}\`\n<:modrinth:1348353426052091995> [Modrinth](https://modrinth.com/modpack/farwater-create-basics)`,
+          },
+          {
+            name: "",
+            value: "-# <:yes:1357104035361984532> - Whitelist required\n-# <:no:1357104048595271954> - Whitelist not required",
+          }
+        );
 
       return interaction.reply({ embeds: [embed] });
     } else if (server === "ATM") {
-      const embed = new EmbedBuilder().setColor("Random").addFields({
-        name: "All the Mods 10 - <:neoforged:1404088666120257737> NeoForged",
-        value: `Whitelist: <:no:1357104048595271954>\nIP: \`${process.env.ATM_10_IP}\`\n<:curseforge:1348353413221453997> [Curseforge](<https://www.curseforge.com/minecraft/modpacks/all-the-mods-10/files/7014213>)`,
-      });
+      const embed = new EmbedBuilder()
+        .setColor("Random")
+        .addFields(
+          {
+            name: "All the Mods 10 - <:neoforged:1404088666120257737> NeoForged",
+            value: `Whitelist: <:no:1357104048595271954>\nIP: \`${process.env.ATM_10_IP}\`\n<:curseforge:1348353413221453997> [Curseforge](<https://www.curseforge.com/minecraft/modpacks/all-the-mods-10/files/7014213>)`,
+          },
+          {
+            name: "",
+            value: "-# <:yes:1357104035361984532> - Whitelist required\n-# <:no:1357104048595271954> - Whitelist not required",
+          }
+        );
 
       return interaction.reply({ embeds: [embed] });
     } else {
@@ -172,6 +188,10 @@ client.on("interactionCreate", async (interaction) => {
           {
             name: "All the Mods 10 - <:neoforged:1404088666120257737> NeoForged",
             value: `Whitelist: <:no:1357104048595271954>\nIP: \`${process.env.ATM_10_IP}\`\n<:curseforge:1348353413221453997> [Curseforge](<https://www.curseforge.com/minecraft/modpacks/all-the-mods-10/files/7014213>)`,
+          },
+          {
+            name: "",
+            value: "-# <:yes:1357104035361984532> - Whitelist required\n-# <:no:1357104048595271954> - Whitelist not required",
           }
         );
       
