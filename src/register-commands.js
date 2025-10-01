@@ -28,10 +28,6 @@ const global_commands = [
             value: `${process.env.BASICS_IP}`,
           },
           {
-            name: "Homestead",
-            value: `${process.env.HOMESTEAD_IP}`,
-          },
-          {
             name: "ATM 10",
             value: `${process.env.ATM_10_IP}`,
           }
@@ -53,10 +49,6 @@ const global_commands = [
           {
             name: "Farwater: Create Basics",
             value: `Basics`,
-          },
-          {
-            name: "Homestead",
-            value: `Homestead`,
           },
           {
             name: "ATM 10",
