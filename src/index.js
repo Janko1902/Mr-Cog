@@ -7,6 +7,7 @@ const {
   IntentsBitField,
   MessageFlags,
   EmbedBuilder,
+  Events,
 } = require("discord.js");
 
 const client = new Client({
@@ -51,7 +52,7 @@ function randomizeStatus() {
   client.user.setPresence(status);
 }
 
-client.on("ready", (c) => {
+client.once(Events.ClientReady, (c) => {
   console.log(`${c.user.tag} is online.`);
 
   randomizeStatus();
