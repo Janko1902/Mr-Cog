@@ -1,6 +1,5 @@
 const { MessageFlags, ActionRowBuilder, ButtonBuilder, ButtonStyle, EmbedBuilder } = require("discord.js");
-
-const { isBlacklisted, addToBlacklist } = require("./blacklist.js");
+const { isBlacklisted, addToBlacklist, removeFromBlacklist } = require("./blacklist.js");
 
 const sendModPing = async (interaction) => {
   const user = interaction.user;
@@ -26,7 +25,7 @@ const sendModPing = async (interaction) => {
     const userEmbed = new EmbedBuilder()
       .setColor("Blue")
       .setTitle("**Mod Ping**")
-      .setDescription(`Moderators are being notified, please be patient.`)
+      .setDescription("Moderators are being notified, please be patient.")
       .setFooter({ text: `Triggered by: ${user.tag}`, iconURL: user.displayAvatarURL() });
 
     const replyMessage = await interaction.reply({
@@ -41,92 +40,160 @@ const sendModPing = async (interaction) => {
         .setStyle(ButtonStyle.Danger),
       new ButtonBuilder()
         .setCustomId("blacklistUser")
-        .setLabel("Blacklist User")
+        .setLabel("Stop and Blacklist User")
         .setStyle(ButtonStyle.Secondary)
     );
+
+    const messageLink = replyMessage.url;
 
     const modEmbed = new EmbedBuilder()
       .setColor("Blue")
       .setTitle("**Mod Ping**")
-      .setDescription(`A mod ping has been activated. Help is on the way!`)
+      .setDescription(`A mod ping has been activated. [Click here to view](${messageLink}).`)
       .setFooter({ text: `Triggered by: ${user.tag}`, iconURL: user.displayAvatarURL() });
 
     const pingMessage = await channel.send({
-      content: modUserIds.map(userId => `<@${userId}>`).join(" "), 
+      content: modUserIds.map((id) => `<@${id}>`).join(" "),
       embeds: [modEmbed],
       components: [buttons],
     });
 
-    const messageLink = replyMessage.url;
-
-    const updatedModEmbed = EmbedBuilder.from(modEmbed).setDescription(
-      `A mod ping has been activated. [Click here to view](${messageLink}).`
-    );
-
     await pingMessage.edit({
-      embeds: [updatedModEmbed],
+      embeds: [modEmbed],
       components: [buttons],
     });
 
     pingMessage.pingInterval = setInterval(async () => {
-      await pingMods(channel, modUserIds, messageLink);
+      const newMessage = await pingMods(channel, modUserIds, messageLink);
+      attachCollector(newMessage, user, modUserIds, replyMessage);
     }, 60000);
 
-    const collector = pingMessage.createMessageComponentCollector({
-      time: 60000,
-    });
-
-    collector.on("collect", async (i) => {
-      if (!modUserIds.includes(i.user.id)) {
-        if (!modUserIds.includes(i.user.id)) {
-          return i.reply({
-            content: "You are not authoized to use this button.",
-            flags: MessageFlags.Ephemeral,
-          })
-        }
-      }
-
-      if (i.customId === "stopModPing") {
-        clearInterval(pingMessage.pingInterval);
-
-        const resolvedEmbed = new EmbedBuilder()
-          .setColor("Green")
-          .setTitle("**Mod Ping Resolved**")
-          .setDescription("The issue has been resolved. Thank you for your patience!");
-
-        await replyMessage.edit({
-          embeds: [resolvedEmbed],
-          components: [],
-        });
-
-        await pingMessage.edit({ components: [] });
-
-        await i.update({ content: "Mod ping stopped.", components: [] });
-      }
-
-      if (i.customId === "blacklistUser") {
-        addToBlacklist(user.id);
-        await i.reply({
-           content: `<@${user.id}> has been blacklisted from using /modping.`,
-          });
-      }
-    });
-
-    collector.on("end", () => {
-      clearInterval(pingMessage.pingInterval);
-    });
+    attachCollector(pingMessage, user, modUserIds, replyMessage);
 
   } catch (error) {
     console.error("Error sending mod ping:", error);
   }
 };
 
+const attachCollector = (message, user, modUserIds, replyMessage) => {
+  const blacklistUserButton = new ActionRowBuilder().addComponents(
+    new ButtonBuilder()
+      .setCustomId("blacklistUser")
+      .setLabel("Blacklist User")
+      .setStyle(ButtonStyle.Secondary)
+  );
+
+  const removeBlacklistedUserButton = new ActionRowBuilder().addComponents(
+    new ButtonBuilder()
+      .setCustomId("removeBlacklistedUser")
+      .setLabel("Remove User from Blacklist")
+      .setStyle(ButtonStyle.Secondary)
+  );
+
+  const collector = message.createMessageComponentCollector({
+    time: 60000,
+  });
+
+  collector.on("collect", async (i) => {
+    if (!modUserIds.includes(i.user.id)) {
+      return i.reply({
+        content: "You are not authorized to use this button.",
+        flags: MessageFlags.Ephemeral,
+      });
+    }
+
+    const resolvedEmbed = new EmbedBuilder()
+      .setColor("Green")
+      .setTitle("**Mod Ping Resolved**")
+      .setDescription("The issue has been resolved. Thank you for your patience!");
+
+    if (i.customId === "stopModPing") {
+      clearInterval(message.pingInterval);
+
+      await replyMessage.edit({
+        embeds: [resolvedEmbed],
+        components: [],
+      });
+
+      await message.edit({ components: [] });
+
+      await i.deferUpdate();
+      await i.message.edit({
+        content: "",
+        components: [blacklistUserButton],
+      });
+    }
+
+    if (i.customId === "blacklistUser") {
+      clearInterval(message.pingInterval);
+      addToBlacklist(user.id);
+
+      const blacklistedEmbed = new EmbedBuilder()
+        .setColor("Grey")
+        .setTitle("User blacklisted")
+        .setDescription(`<@${user.id}> has been blacklisted from using /modping.`);
+
+      await replyMessage.edit({ embeds: [resolvedEmbed], components: [] });
+
+      await i.deferUpdate();
+      await i.message.edit({
+        content: "",
+        embeds: [blacklistedEmbed],
+        components: [removeBlacklistedUserButton],
+      });
+    }
+
+    if (i.customId === "removeBlacklistedUser") {
+      removeFromBlacklist(user.id);
+
+      const removedEmbed = new EmbedBuilder()
+        .setColor("Grey")
+        .setTitle("User removed from Blacklist")
+        .setDescription(`<@${user.id}> has been removed from the blacklist.`);
+
+      await i.deferUpdate();
+      await i.message.edit({
+        content: "",
+        embeds: [removedEmbed],
+        components: [],
+      });
+    }
+  });
+
+  collector.on("end", () => {
+    clearInterval(message.pingInterval);
+  });
+};
+
 const pingMods = async (channel, modUserIds, messageLink) => {
   try {
-    const modsToPing = modUserIds.map(userId => `<@${userId}>`).join(" ");
-    if (modsToPing) {
-      await channel.send(`${modsToPing}\n**Mod Ping in progress.**\n**Mod Ping Link:** ${messageLink}`);
-    }
+    const modsToPing = modUserIds.map((id) => `<@${id}>`).join(" ");
+    if (!modsToPing) return;
+
+    const embed = new EmbedBuilder()
+      .setColor("Blue")
+      .setTitle("**Mod Ping In Progress**")
+      .setDescription(
+        `A mod ping is active. [Click here to view](${messageLink}).`
+      )
+      .setTimestamp();
+
+    const buttons = new ActionRowBuilder().addComponents(
+      new ButtonBuilder()
+        .setCustomId("stopModPing")
+        .setLabel("Stop Mod Ping")
+        .setStyle(ButtonStyle.Danger),
+      new ButtonBuilder()
+        .setCustomId("blacklistUser")
+        .setLabel("Stop and Blacklist User")
+        .setStyle(ButtonStyle.Secondary)
+    );
+
+    return await channel.send({
+      content: `${modsToPing}`,
+      embeds: [embed],
+      components: [buttons],
+    });
   } catch (error) {
     console.error("Error pinging mods:", error);
   }
