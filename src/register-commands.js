@@ -30,6 +30,10 @@ const global_commands = [
           {
             name: "ATM 10",
             value: `${process.env.ATM_10_IP}`,
+          },
+          {
+            name: "Create: Stranded at Sea",
+            value: `${process.env.SAS_IP}`,
           }
         ],
         required: true,
@@ -53,6 +57,10 @@ const global_commands = [
           {
             name: "ATM 10",
             value: `ATM`,
+          },
+          {
+            name: "Create: Stranded at Sea",
+            value: "SAS",
           }
         ],
         required: true,
@@ -76,6 +84,10 @@ const global_commands = [
           {
             name: "ATM 10",
             value: `ATM`,
+          },
+          {
+            name: "Create: Stranded at Sea",
+            value: "SAS",
           }
         ],
       },

@@ -114,6 +114,12 @@ client.on("interactionCreate", async (interaction) => {
         .addFields({ name: "All the Mods 10", value: `IP: ${ip}` });
 
       return interaction.reply({ embeds: [embed] });
+    } else if (ip === process.env.SAS_IP) {
+      const embed = new EmbedBuilder()
+        .setColor("Random")
+        .addFields({ name: "Create: Stranded at Sea", value: `IP: ${ip}` });
+
+      return interaction.reply({ embeds: [embed] });
     }
   }
 
@@ -131,6 +137,13 @@ client.on("interactionCreate", async (interaction) => {
       const embed = new EmbedBuilder().setColor("Random").addFields({
         name: "All the Mods 10 modpack",
         value: `<:curseforge:1348353413221453997> [Curseforge](<https://www.curseforge.com/minecraft/modpacks/all-the-mods-10/files/7014213>)`,
+      });
+
+      return interaction.reply({ embeds: [embed] });
+    } else if (modpack === "SAS") {
+      const embed = new EmbedBuilder().setColor("Random").addFields({
+        name: "Create: Stranded at Sea modpack",
+        value: `<:curseforge:1348353413221453997> [Curseforge](<https://www.curseforge.com/minecraft/modpacks/create-stranded-at-sea>)`,
       });
 
       return interaction.reply({ embeds: [embed] });
@@ -176,6 +189,21 @@ client.on("interactionCreate", async (interaction) => {
         );
 
       return interaction.reply({ embeds: [embed] });
+    } else if (server === "SAS") {
+      const embed = new EmbedBuilder()
+        .setColor("Random")
+        .addFields(
+          {
+            name: "Create: Stranded at Sea - <:neoforged:1404088666120257737> NeoForged",
+            value: `Whitelist: <:no:1357104048595271954>\nIP: \`${process.env.SAS_IP}\`\n<:curseforge:1348353413221453997> [Curseforge](<https://www.curseforge.com/minecraft/modpacks/create-stranded-at-sea>)`,
+          },
+          {
+            name: "",
+            value: "-# <:yes:1357104035361984532> - Whitelist required\n-# <:no:1357104048595271954> - Whitelist not required",
+          }
+        );
+
+      return interaction.reply({ embeds: [embed] });
     } else {
       const embed = new EmbedBuilder()
         .setTitle("Farwater Servers")
@@ -188,6 +216,10 @@ client.on("interactionCreate", async (interaction) => {
           {
             name: "All the Mods 10 - <:neoforged:1404088666120257737> NeoForged",
             value: `Whitelist: <:no:1357104048595271954>\nIP: \`${process.env.ATM_10_IP}\`\n<:curseforge:1348353413221453997> [Curseforge](<https://www.curseforge.com/minecraft/modpacks/all-the-mods-10/files/7014213>)`,
+          },
+          {
+            name: "Create: Stranded at Sea - <:neoforged:1404088666120257737> NeoForged",
+            value: `Whitelist: <:no:1357104048595271954>\nIP: \`${process.env.SAS_IP}\`\n<:curseforge:1348353413221453997> [Curseforge](<https://www.curseforge.com/minecraft/modpacks/create-stranded-at-sea>)`,
           },
           {
             name: "",
