@@ -129,21 +129,21 @@ client.on("interactionCreate", async (interaction) => {
 
     if (modpack === "Basics") {
       const embed = new EmbedBuilder().setColor("Random").addFields({
-        name: "Farwater: Create Basics modpack",
+        name: "Farwater: Create Basics - <:neoforged:1404088666120257737> NeoForged",
         value: `<:modrinth:1348353426052091995> [Modrinth](<https://modrinth.com/modpack/farwater-create-basics>)`,
       });
 
       return interaction.reply({ embeds: [embed] });
     } else if (modpack === "ATM") {
       const embed = new EmbedBuilder().setColor("Random").addFields({
-        name: "All the Mods 10 modpack",
+        name: "All the Mods 10 - <:neoforged:1404088666120257737> NeoForged",
         value: `<:curseforge:1348353413221453997> [Curseforge](<https://www.curseforge.com/minecraft/modpacks/all-the-mods-10/files/7014213>)`,
       });
 
       return interaction.reply({ embeds: [embed] });
     } else if (modpack === "SAS") {
       const embed = new EmbedBuilder().setColor("Random").addFields({
-        name: "Create: Stranded at Sea modpack",
+        name: "Create: Stranded at Sea - <:neoforged:1404088666120257737> NeoForged",
         value: `<:curseforge:1348353413221453997> [Curseforge](<https://www.curseforge.com/minecraft/modpacks/create-stranded-at-sea>)`,
       });
 
@@ -165,7 +165,7 @@ client.on("interactionCreate", async (interaction) => {
         .setColor("Random")
         .addFields(
           {
-            name: "Farwater: Create Basics - <:fabric:1348353372012413000> Fabric",
+            name: "Farwater: Create Basics - <:neoforged:1404088666120257737> NeoForged",
             value: `Whitelist: <:no:1357104048595271954>\nIP: \`${process.env.BASICS_IP}\`\n<:modrinth:1348353426052091995> [Modrinth](https://modrinth.com/modpack/farwater-create-basics)`,
           },
           {
@@ -211,7 +211,7 @@ client.on("interactionCreate", async (interaction) => {
         .setColor("Random")
         .addFields(
           {
-            name: "Farwater: Create Basics - <:fabric:1348353372012413000> Fabric",
+            name: "Farwater: Create Basics - <:neoforged:1404088666120257737> NeoForged",
             value: `Whitelist: <:no:1357104048595271954>\nIP: \`${process.env.BASICS_IP}\`\n<:modrinth:1348353426052091995> [Modrinth](https://modrinth.com/modpack/farwater-create-basics)`,
           },
           {
