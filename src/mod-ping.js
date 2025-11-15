@@ -52,23 +52,36 @@ const sendModPing = async (interaction) => {
       .setDescription(`A mod ping has been activated. [Click here to view](${messageLink}).`)
       .setFooter({ text: `Triggered by: ${user.tag}`, iconURL: user.displayAvatarURL() });
 
-    const pingMessage = await channel.send({
+    let lastPingMessage = await channel.send({
       content: modUserIds.map((id) => `<@${id}>`).join(" "),
       embeds: [modEmbed],
       components: [buttons],
     });
 
-    await pingMessage.edit({
+    await lastPingMessage.edit({
       embeds: [modEmbed],
       components: [buttons],
     });
 
-    pingMessage.pingInterval = setInterval(async () => {
-      const newMessage = await pingMods(channel, modUserIds, messageLink);
-      attachCollector(newMessage, user, modUserIds, replyMessage);
+    pingInterval = setInterval(async () => {
+      try {
+        if (!lastPingMessage.deleted) {
+          await lastPingMessage.edit({ 
+            content: "",
+            components: [] 
+          });
+        }
+  
+        const newMessage = await pingMods(channel, modUserIds, messageLink);
+        lastPingMessage = newMessage;
+        attachCollector(newMessage, user, modUserIds, replyMessage);
+  
+      } catch (error) {
+        console.error("Error in ping interval:", error);
+      }
     }, 60000);
 
-    attachCollector(pingMessage, user, modUserIds, replyMessage);
+    attachCollector(lastPingMessage, user, modUserIds, replyMessage);
 
   } catch (error) {
     console.error("Error sending mod ping:", error);
@@ -108,7 +121,7 @@ const attachCollector = (message, user, modUserIds, replyMessage) => {
       .setDescription("The issue has been resolved. Thank you for your patience!");
 
     if (i.customId === "stopModPing") {
-      clearInterval(message.pingInterval);
+      clearInterval(pingInterval);
 
       await replyMessage.edit({
         embeds: [resolvedEmbed],
@@ -125,7 +138,7 @@ const attachCollector = (message, user, modUserIds, replyMessage) => {
     }
 
     if (i.customId === "blacklistUser") {
-      clearInterval(message.pingInterval);
+      clearInterval(pingInterval);
       addToBlacklist(user.id);
 
       const blacklistedEmbed = new EmbedBuilder()
@@ -158,10 +171,6 @@ const attachCollector = (message, user, modUserIds, replyMessage) => {
         components: [],
       });
     }
-  });
-
-  collector.on("end", () => {
-    clearInterval(message.pingInterval);
   });
 };
 
