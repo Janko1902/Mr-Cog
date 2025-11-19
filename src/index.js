@@ -109,12 +109,6 @@ client.on("interactionCreate", async (interaction) => {
         .addFields({ name: "Farwater: Create Basics", value: `IP: ${ip}` });
 
       return interaction.reply({ embeds: [embed] });
-    } else if (ip === process.env.ATM_10_IP) {
-      const embed = new EmbedBuilder()
-        .setColor("Random")
-        .addFields({ name: "All the Mods 10", value: `IP: ${ip}` });
-
-      return interaction.reply({ embeds: [embed] });
     } else if (ip === process.env.SAS_IP) {
       const embed = new EmbedBuilder()
         .setColor("Random")
@@ -131,13 +125,6 @@ client.on("interactionCreate", async (interaction) => {
       const embed = new EmbedBuilder().setColor("Random").addFields({
         name: "Farwater: Create Basics - <:neoforged:1404088666120257737> NeoForged",
         value: `<:modrinth:1348353426052091995> [Modrinth](<https://modrinth.com/modpack/farwater-create-basics>)`,
-      });
-
-      return interaction.reply({ embeds: [embed] });
-    } else if (modpack === "ATM") {
-      const embed = new EmbedBuilder().setColor("Random").addFields({
-        name: "All the Mods 10 - <:neoforged:1404088666120257737> NeoForged",
-        value: `<:curseforge:1348353413221453997> [Curseforge](<https://www.curseforge.com/minecraft/modpacks/all-the-mods-10/files/7014213>)`,
       });
 
       return interaction.reply({ embeds: [embed] });
@@ -175,21 +162,6 @@ client.on("interactionCreate", async (interaction) => {
         );
 
       return interaction.reply({ embeds: [embed] });
-    } else if (server === "ATM") {
-      const embed = new EmbedBuilder()
-        .setColor("Random")
-        .addFields(
-          {
-            name: "All the Mods 10 - <:neoforged:1404088666120257737> NeoForged",
-            value: `Whitelist: <:no:1357104048595271954>\nIP: \`${process.env.ATM_10_IP}\`\n<:curseforge:1348353413221453997> [Curseforge](<https://www.curseforge.com/minecraft/modpacks/all-the-mods-10/files/7014213>)`,
-          },
-          {
-            name: "",
-            value: "-# <:yes:1357104035361984532> - Whitelist required\n-# <:no:1357104048595271954> - Whitelist not required",
-          }
-        );
-
-      return interaction.reply({ embeds: [embed] });
     } else if (server === "SAS") {
       const embed = new EmbedBuilder()
         .setColor("Random")
@@ -213,10 +185,6 @@ client.on("interactionCreate", async (interaction) => {
           {
             name: "Farwater: Create Basics - <:neoforged:1404088666120257737> NeoForged",
             value: `Whitelist: <:no:1357104048595271954>\nIP: \`${process.env.BASICS_IP}\`\n<:modrinth:1348353426052091995> [Modrinth](https://modrinth.com/modpack/farwater-create-basics)`,
-          },
-          {
-            name: "All the Mods 10 - <:neoforged:1404088666120257737> NeoForged",
-            value: `Whitelist: <:no:1357104048595271954>\nIP: \`${process.env.ATM_10_IP}\`\n<:curseforge:1348353413221453997> [Curseforge](<https://www.curseforge.com/minecraft/modpacks/all-the-mods-10/files/7014213>)`,
           },
           {
             name: "Create: Stranded at Sea - <:neoforged:1404088666120257737> NeoForged",
