@@ -28,10 +28,6 @@ const global_commands = [
             value: `${process.env.BASICS_IP}`,
           },
           {
-            name: "ATM 10",
-            value: `${process.env.ATM_10_IP}`,
-          },
-          {
             name: "Create: Stranded at Sea",
             value: `${process.env.SAS_IP}`,
           }
@@ -55,10 +51,6 @@ const global_commands = [
             value: `Basics`,
           },
           {
-            name: "ATM 10",
-            value: `ATM`,
-          },
-          {
             name: "Create: Stranded at Sea",
             value: "SAS",
           }
@@ -80,10 +72,6 @@ const global_commands = [
           {
             name: "Farwater: Create Basics",
             value: `Basics`,
-          },
-          {
-            name: "ATM 10",
-            value: `ATM`,
           },
           {
             name: "Create: Stranded at Sea",
