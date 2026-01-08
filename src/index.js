@@ -128,13 +128,6 @@ client.on("interactionCreate", async (interaction) => {
       });
 
       return interaction.reply({ embeds: [embed] });
-    } else if (modpack === "SAS") {
-      const embed = new EmbedBuilder().setColor("Random").addFields({
-        name: "Create: Stranded at Sea - <:neoforged:1404088666120257737> NeoForged",
-        value: `<:curseforge:1348353413221453997> [Curseforge](<https://www.curseforge.com/minecraft/modpacks/create-stranded-at-sea>)`,
-      });
-
-      return interaction.reply({ embeds: [embed] });
     }
   }
 
@@ -162,21 +155,6 @@ client.on("interactionCreate", async (interaction) => {
         );
 
       return interaction.reply({ embeds: [embed] });
-    } else if (server === "SAS") {
-      const embed = new EmbedBuilder()
-        .setColor("Random")
-        .addFields(
-          {
-            name: "Create: Stranded at Sea - <:neoforged:1404088666120257737> NeoForged",
-            value: `Whitelist: <:no:1357104048595271954>\nIP: \`${process.env.SAS_IP}\`\n<:curseforge:1348353413221453997> [Curseforge](<https://www.curseforge.com/minecraft/modpacks/create-stranded-at-sea>)`,
-          },
-          {
-            name: "",
-            value: "-# <:yes:1357104035361984532> - Whitelist required\n-# <:no:1357104048595271954> - Whitelist not required",
-          }
-        );
-
-      return interaction.reply({ embeds: [embed] });
     } else {
       const embed = new EmbedBuilder()
         .setTitle("Farwater Servers")
@@ -185,10 +163,6 @@ client.on("interactionCreate", async (interaction) => {
           {
             name: "Farwater: Create Basics - <:neoforged:1404088666120257737> NeoForged",
             value: `Whitelist: <:no:1357104048595271954>\nIP: \`${process.env.BASICS_IP}\`\n<:modrinth:1348353426052091995> [Modrinth](https://modrinth.com/modpack/farwater-create-basics)`,
-          },
-          {
-            name: "Create: Stranded at Sea - <:neoforged:1404088666120257737> NeoForged",
-            value: `Whitelist: <:no:1357104048595271954>\nIP: \`${process.env.SAS_IP}\`\n<:curseforge:1348353413221453997> [Curseforge](<https://www.curseforge.com/minecraft/modpacks/create-stranded-at-sea>)`,
           },
           {
             name: "",
