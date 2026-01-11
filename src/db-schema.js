@@ -1,7 +1,7 @@
 const {Sequelize, DataTypes} = require('sequelize');
 
 // https://sequelize.org/api/v6/class/src/sequelize.js~sequelize#instance-constructor-constructor
-const sequelize = new Sequelize(
+/*const sequelize = new Sequelize(
     'mr_cog', //database name
     'username', //username
     null, //password
@@ -9,8 +9,19 @@ const sequelize = new Sequelize(
         host: process.env.DATABASE_HOST,
         dialect: 'mariadb'
     }
-)
+)*/
 
+const sequelize = new Sequelize({
+    dialect: 'sqlite',
+    storage: './database/database.db'
+});
+
+try {
+    await sequelize.authenticate();
+    console.log('Connection has been established successfully.');
+} catch (error) {
+    console.error('Unable to connect to the database:', error);
+}
 /*
 By default, Sequelize automatically adds
 the attributes createdAt and updatedAt to
