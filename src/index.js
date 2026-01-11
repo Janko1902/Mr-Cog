@@ -63,18 +63,18 @@ client.once(Events.ClientReady, (c) => {
 client.on("interactionCreate", async (interaction) => {
   if (!interaction.isChatInputCommand()) return;
 
-  if (interaction.inGuild()) {
-    const hasPermission = interaction.member.roles.cache.some((role) =>
+  const hasPermission = interaction.inGuild() ?
+    interaction.member.roles.cache.some((role) =>
       [
         "Owner",
         "Founder",
-        "Sendior Admin",
+        "Senior Admin",
         "Admin",
         "Moderator",
         "Alpha Tester",
       ].includes(role.name)
-    );
-  }
+    ) : false;
+
 
   if (interaction.commandName === "ip") {
     const ip = interaction.options.get("server").value;
