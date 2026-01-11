@@ -17,12 +17,12 @@ const sequelize = new Sequelize({
 });
 
 async function testConnection() {
-  try {
-    await sequelize.authenticate();
-    console.log('Connection established');
-  } catch (err) {
-    console.error('Connection failed:', err);
-  }
+    try {
+        await sequelize.authenticate();
+        console.log('Connection established');
+    } catch (err) {
+        console.error('Connection failed:', err);
+    }
 }
 
 testConnection();
@@ -34,6 +34,15 @@ async function runSync(table) {
     } catch (err) {
         console.error('Sync failed:', err);
     }
+}
+
+export function normalizeBirthdate(value) {
+    if (!value) return null;
+
+    const d = new Date(value);
+    d.setDate(1); // force day to 1
+
+    return d.toISOString().slice(0, 10); // YYYY-MM-DD
 }
 
 
@@ -64,6 +73,9 @@ const User = sequelize.define(
         birthdate: {
             type: DataTypes.DATEONLY,
             allowNull: false,
+            set(value) {
+                this.setDataValue('birthdate', normalizeBirthdate(value));
+            },
         },
         discordId: {
             type: DataTypes.STRING,
@@ -115,6 +127,9 @@ const WhitelistApplication = sequelize.define(
         birthdate: {
             type: DataTypes.DATEONLY,
             allowNull: false,
+            set(value) {
+                this.setDataValue('birthdate', normalizeBirthdate(value));
+            },
         },
         applicationReason: {
             type: DataTypes.TEXT,
@@ -263,20 +278,20 @@ const Punishment = sequelize.define(
 
 //region relations
 
-User.belongsToMany(Server, { through: 'ServerPlayerWhitelist' });
-Server.belongsToMany(User, { through: 'ServerPlayerWhitelist' });
+User.belongsToMany(Server, {through: 'ServerPlayerWhitelist'});
+Server.belongsToMany(User, {through: 'ServerPlayerWhitelist'});
 
-WhitelistApplication.belongsTo(User, { foreignKey: 'userID', as: 'Applicant' });
-User.hasMany(WhitelistApplication, { foreignKey: 'userID', as: 'Applications' });
+WhitelistApplication.belongsTo(User, {foreignKey: 'userID', as: 'Applicant'});
+User.hasMany(WhitelistApplication, {foreignKey: 'userID', as: 'Applications'});
 
-WhitelistApplication.belongsTo(User, { foreignKey: 'staffReviewerID', as: 'Reviewer' });
-User.hasMany(WhitelistApplication, { foreignKey: 'staffReviewerID', as: 'ReviewedApplications' });
+WhitelistApplication.belongsTo(User, {foreignKey: 'staffReviewerID', as: 'Reviewer'});
+User.hasMany(WhitelistApplication, {foreignKey: 'staffReviewerID', as: 'ReviewedApplications'});
 
-WhitelistApplication.belongsTo(Server, { foreignKey: 'serverID' });
-Server.hasMany(WhitelistApplication, { foreignKey: 'serverID' });
+WhitelistApplication.belongsTo(Server, {foreignKey: 'serverID'});
+Server.hasMany(WhitelistApplication, {foreignKey: 'serverID'});
 
-Infraction.belongsTo(User, { foreignKey: 'userID', as: 'Offender' });
-User.hasMany(Infraction, { foreignKey: 'userID', as: 'Offenses' });
+Infraction.belongsTo(User, {foreignKey: 'userID', as: 'Offender'});
+User.hasMany(Infraction, {foreignKey: 'userID', as: 'Offenses'});
 
 
 Punishment.belongsTo(Infraction, {foreignKey: 'infractionID'});
@@ -285,9 +300,8 @@ Infraction.hasMany(Punishment, {foreignKey: 'infractionID'});
 Punishment.belongsTo(Server, {foreignKey: 'serverID'});
 Server.hasMany(Punishment, {foreignKey: 'serverID'});
 
-Infraction.belongsTo(User, { foreignKey: 'staffIssuerID', as: 'Issuer' });
-User.hasMany(Infraction, { foreignKey: 'staffIssuerID', as: 'IssuedInfractions' });
-
+Infraction.belongsTo(User, {foreignKey: 'staffIssuerID', as: 'Issuer'});
+User.hasMany(Infraction, {foreignKey: 'staffIssuerID', as: 'IssuedInfractions'});
 
 
 //endregion
