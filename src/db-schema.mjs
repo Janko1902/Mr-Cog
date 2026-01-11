@@ -1,4 +1,4 @@
-const {Sequelize, DataTypes, Model} = require('sequelize');
+import {DataTypes, Sequelize} from 'sequelize';
 
 // https://sequelize.org/api/v6/class/src/sequelize.js~sequelize#instance-constructor-constructor
 /*const sequelize = new Sequelize(
@@ -16,27 +16,8 @@ const sequelize = new Sequelize({
     storage: '../database/database.db'
 });
 
-async function testConnection() {
-    try {
-        await sequelize.authenticate();
-        console.log('Connection established');
-    } catch (err) {
-        console.error('Connection failed:', err);
-    }
-}
 
-testConnection();
-
-async function runSync(table) {
-    try {
-        await table.sync();
-        console.log('Table Synced');
-    } catch (err) {
-        console.error('Sync failed:', err);
-    }
-}
-
-export function normalizeBirthdate(value) {
+function normalizeBirthdate(value) {
     if (!value) return null;
 
     const d = new Date(value);
@@ -77,7 +58,7 @@ export const User = sequelize.define(
                 this.setDataValue('birthdate', normalizeBirthdate(value));
             },
         },
-        discordId: {
+        discordID: {
             type: DataTypes.STRING,
             allowNull: false,
             unique: true,
@@ -309,11 +290,25 @@ User.hasMany(Infraction, {foreignKey: 'staffIssuerID', as: 'IssuedInfractions'})
 
 //region sync
 // Syncing the models with the database
-runSync(User);
-runSync(WhitelistApplication);
-runSync(Server);
-runSync(Infraction);
-runSync(Punishment);
+
+
+export async function initializeDatabase() {
+    try {
+        await sequelize.authenticate();
+        console.log('Connection established');
+
+        await sequelize.sync();
+        console.log('Tables synced');
+        console.log('Database Ready');
+
+    } catch (err) {
+        console.error('Connection failed:', err);
+        return false;
+    }
+
+    return true;
+}
+
 //endregion
 
 // `sequelize.define` also returns the model
