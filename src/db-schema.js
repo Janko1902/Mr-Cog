@@ -61,7 +61,7 @@ auto-incremented integer attribute
 called id as primary key
 if none is specified.
 */
-const User = sequelize.define(
+export const User = sequelize.define(
     'User',
     {
         // Model attributes are defined here
@@ -113,7 +113,7 @@ const User = sequelize.define(
     },
 );
 
-const WhitelistApplication = sequelize.define(
+export const WhitelistApplication = sequelize.define(
     'WhitelistApplication',
     {
         userID: {
@@ -159,7 +159,7 @@ const WhitelistApplication = sequelize.define(
     },
 );
 
-const Server = sequelize.define(
+export const Server = sequelize.define(
     'Server',
     {
         name: {
@@ -209,7 +209,7 @@ const Server = sequelize.define(
     },
 );
 
-const Infraction = sequelize.define(
+export const Infraction = sequelize.define(
     'Infraction',
     {
         userID: {
@@ -232,7 +232,7 @@ const Infraction = sequelize.define(
     },
 );
 
-const Punishment = sequelize.define(
+export const Punishment = sequelize.define(
     'Punishment',
     {
         type: {
