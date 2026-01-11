@@ -1,4 +1,4 @@
-const {Sequelize, DataTypes} = require('sequelize');
+const {Sequelize, DataTypes, Model} = require('sequelize');
 
 // https://sequelize.org/api/v6/class/src/sequelize.js~sequelize#instance-constructor-constructor
 /*const sequelize = new Sequelize(
@@ -13,15 +13,29 @@ const {Sequelize, DataTypes} = require('sequelize');
 
 const sequelize = new Sequelize({
     dialect: 'sqlite',
-    storage: './database/database.db'
+    storage: '../database/database.db'
 });
 
-try {
+async function testConnection() {
+  try {
     await sequelize.authenticate();
-    console.log('Connection has been established successfully.');
-} catch (error) {
-    console.error('Unable to connect to the database:', error);
+    console.log('Connection established');
+  } catch (err) {
+    console.error('Connection failed:', err);
+  }
 }
+
+testConnection();
+
+async function runSync(table) {
+    try {
+        await table.sync();
+        console.log('Table Synced');
+    } catch (err) {
+        console.error('Sync failed:', err);
+    }
+}
+
 /*
 By default, Sequelize automatically adds
 the attributes createdAt and updatedAt to
@@ -55,10 +69,12 @@ const User = sequelize.define(
         },
         mcUuid: {
             type: DataTypes.STRING,
+            allowNull: true,
             unique: true,
         },
         mcName: {
             type: DataTypes.STRING,
+            allowNull: true,
             unique: true,
         },
         email: {
@@ -81,7 +97,8 @@ const User = sequelize.define(
         freezeTableName: true,
     },
 );
-await User.sync(); // ensures record is in your database
+
+runSync(User);
 
 // `sequelize.define` also returns the model
-console.log(User === sequelize.models.User); // true
+console.log(User === sequelize.authenticate()); // true
