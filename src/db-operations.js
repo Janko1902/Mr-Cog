@@ -1,4 +1,4 @@
-import {User, Server, WhitelistApplication, Infraction, Punishment, initializeDatabase} from './db-schema.mjs';
+import {User, Server, WhitelistApplication, Infraction, Punishment, initializeDatabase} from './db-schema.js';
 
 
 export async function createUser(name, discordID, birthdate, email) {
