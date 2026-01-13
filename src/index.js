@@ -90,7 +90,7 @@ client.on("interactionCreate", async (interaction) => {
           .setColor("Random")
           .addFields({
             name: "Farwater: Deep Down Underground",
-            value: `IP: ${ip}`,
+            value: `IP: \`${ip}\``,
           });
 
         return interaction.reply({
@@ -106,13 +106,13 @@ client.on("interactionCreate", async (interaction) => {
     } else if (ip === process.env.BASICS_IP) {
       const embed = new EmbedBuilder()
         .setColor("Random")
-        .addFields({ name: "Farwater: Create Basics", value: `IP: ${ip}` });
+        .addFields({ name: "Farwater: Create Basics", value: `\`IP: ${ip}\`` });
 
       return interaction.reply({ embeds: [embed] });
-    } else if (ip === process.env.SAS_IP) {
+    } else if (ip === process.env.HYTALE_IP) {
       const embed = new EmbedBuilder()
         .setColor("Random")
-        .addFields({ name: "Create: Stranded at Sea", value: `IP: ${ip}` });
+        .addFields({ name: "Farwater: Our Tale", value: `IP: \`${ip}\`` });
 
       return interaction.reply({ embeds: [embed] });
     }
@@ -155,6 +155,21 @@ client.on("interactionCreate", async (interaction) => {
         );
 
       return interaction.reply({ embeds: [embed] });
+    } else if (server === "Hytale") {
+      const embed = new EmbedBuilder()
+        .setColor("Random")
+        .addFields(
+          {
+            name: "Farwater: Our Tale - <:hytale:1460609588083556458> Hytale",
+            value: `Whitelist: <:no:1357104048595271954>\nIP: \`${process.env.HYTALE_IP}\``,
+          },
+          {
+            name: "",
+            value: "-# <:yes:1357104035361984532> - Whitelist required\n-# <:no:1357104048595271954> - Whitelist not required",
+          }
+        );
+
+      return interaction.reply({ embeds: [embed] });
     } else {
       const embed = new EmbedBuilder()
         .setTitle("Farwater Servers")
@@ -163,6 +178,10 @@ client.on("interactionCreate", async (interaction) => {
           {
             name: "Farwater: Create Basics - <:neoforged:1404088666120257737> NeoForged",
             value: `Whitelist: <:no:1357104048595271954>\nIP: \`${process.env.BASICS_IP}\`\n<:modrinth:1348353426052091995> [Modrinth](https://modrinth.com/modpack/farwater-create-basics)`,
+          },
+          {
+            name: "Farwater: Our Tale - <:hytale:1460609588083556458> Hytale",
+            value: `Whitelist: <:no:1357104048595271954>\nIP: \`${process.env.HYTALE_IP}\``,
           },
           {
             name: "",

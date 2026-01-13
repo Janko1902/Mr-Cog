@@ -26,6 +26,10 @@ const global_commands = [
           {
             name: "Farwater: Create Basics",
             value: `${process.env.BASICS_IP}`,
+          },
+          {
+            name: "Farwater: Our Tale",
+            value: `${process.env.HYTALE_IP}`,
           }
         ],
         required: true,
@@ -64,6 +68,10 @@ const global_commands = [
           {
             name: "Farwater: Create Basics",
             value: `Basics`,
+          },
+          {
+            name: "Farwater: Our Tale",
+            value: `Hytale`,
           }
         ],
       },
