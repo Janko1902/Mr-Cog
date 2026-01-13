@@ -45,6 +45,13 @@ const statuses = [
     }],
     status: "online",
   },
+  {
+    activities: [{ 
+      name: "Hytale", 
+      type: 0 
+    }],
+    status: "online",
+  }
 ]
 
 function randomizeStatus() {
