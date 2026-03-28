@@ -153,7 +153,7 @@ client.on("interactionCreate", async (interaction) => {
         .addFields(
           {
             name: "Farwater: Create Basics - <:neoforged:1404088666120257737> NeoForged",
-            value: `Whitelist: <:no:1357104048595271954>\nIP: \`${process.env.BASICS_IP}\`\n<:modrinth:1348353426052091995> [Modrinth](https://modrinth.com/modpack/farwater-create-basics)`,
+            value: `Whitelist: <:yes:1357104035361984532>\nIP: \`${process.env.BASICS_IP}\`\n<:modrinth:1348353426052091995> [Modrinth](https://modrinth.com/modpack/farwater-create-basics)`,
           },
           {
             name: "",
@@ -184,7 +184,7 @@ client.on("interactionCreate", async (interaction) => {
         .addFields(
           {
             name: "Farwater: Create Basics - <:neoforged:1404088666120257737> NeoForged",
-            value: `Whitelist: <:no:1357104048595271954>\nIP: \`${process.env.BASICS_IP}\`\n<:modrinth:1348353426052091995> [Modrinth](https://modrinth.com/modpack/farwater-create-basics)`,
+            value: `Whitelist: <:yes:1357104035361984532>\nIP: \`${process.env.BASICS_IP}\`\n<:modrinth:1348353426052091995> [Modrinth](https://modrinth.com/modpack/farwater-create-basics)`,
           },
           {
             name: "Farwater: Our Tale - <:hytale:1460609588083556458> Hytale",
