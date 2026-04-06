@@ -130,7 +130,7 @@ client.on("interactionCreate", async (interaction) => {
 
     if (modpack === "Basics") {
       const embed = new EmbedBuilder().setColor("Random").addFields({
-        name: "Farwater: Create Basics - <:neoforged:1404088666120257737> NeoForged",
+        name: "Farwater: Create Basics - <:forge:1348353401226006760> Forge",
         value: `<:modrinth:1348353426052091995> [Modrinth](<https://modrinth.com/modpack/farwater-create-basics>)`,
       });
 
@@ -152,7 +152,7 @@ client.on("interactionCreate", async (interaction) => {
         .setColor("Random")
         .addFields(
           {
-            name: "Farwater: Create Basics - <:neoforged:1404088666120257737> NeoForged",
+            name: "Farwater: Create Basics - <:forge:1348353401226006760> Forge",
             value: `Whitelist: <:yes:1357104035361984532>\nIP: \`${process.env.BASICS_IP}\`\n<:modrinth:1348353426052091995> [Modrinth](https://modrinth.com/modpack/farwater-create-basics)`,
           },
           {
@@ -183,7 +183,7 @@ client.on("interactionCreate", async (interaction) => {
         .setColor("Random")
         .addFields(
           {
-            name: "Farwater: Create Basics - <:neoforged:1404088666120257737> NeoForged",
+            name: "Farwater: Create Basics - <:forge:1348353401226006760> Forge",
             value: `Whitelist: <:yes:1357104035361984532>\nIP: \`${process.env.BASICS_IP}\`\n<:modrinth:1348353426052091995> [Modrinth](https://modrinth.com/modpack/farwater-create-basics)`,
           },
           {
